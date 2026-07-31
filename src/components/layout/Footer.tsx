@@ -1,17 +1,8 @@
-import {
-  ExternalLink,
-  FileText,
-  Camera,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Phone,
-  Send,
-  Store,
-} from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { company, contacts, socialLinks } from "../../data/env";
 import { media } from "../../data/media";
 import { Link } from "../../router/Router";
+import { SocialIcon } from "../ui/SocialIcon";
 
 const footerNav = [
   { label: "Главная", to: "/" },
@@ -26,23 +17,6 @@ const footerServices = [
   { label: "Поставки", to: "/supplies" },
   { label: "Заявка на расчет", to: "/contacts" },
 ];
-
-const socialIcon = (label: string) => {
-  switch (label) {
-    case "Telegram":
-      return <Send aria-hidden="true" size={20} />;
-    case "WhatsApp":
-      return <MessageCircle aria-hidden="true" size={20} />;
-    case "Instagram":
-      return <Camera aria-hidden="true" size={20} />;
-    case "Avito":
-      return <Store aria-hidden="true" size={20} />;
-    case "VK":
-      return <span aria-hidden="true">vk</span>;
-    default:
-      return <ExternalLink aria-hidden="true" size={20} />;
-  }
-};
 
 export function Footer() {
   return (
@@ -70,10 +44,12 @@ export function Footer() {
                   className="footer-socials__link"
                   href={link.value}
                   key={link.label}
+                  rel="noopener noreferrer"
+                  target="_blank"
                   title={link.label}
                   aria-label={link.label}
                 >
-                  {socialIcon(link.label)}
+                  <SocialIcon label={link.label} />
                 </a>
               ))}
             </div>
@@ -117,15 +93,6 @@ export function Footer() {
               </span>
             )}
           </div>
-
-          <nav className="footer-column" aria-label="Документы в подвале">
-            <h2>Документы</h2>
-            <Link to="/privacy">
-              <FileText aria-hidden="true" size={16} /> Политика обработки
-              персональных данных
-            </Link>
-            <Link to="/contacts">Отправить заявку</Link>
-          </nav>
         </div>
 
         <div className="site-footer__bottom">

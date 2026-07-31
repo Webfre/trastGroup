@@ -8,6 +8,7 @@ type SectionProps = {
   description?: string;
   eyebrow?: string;
   headerAlign?: "left" | "center";
+  id?: string;
   tone?: "default" | "soft" | "dark";
   title?: string;
 };
@@ -19,6 +20,7 @@ export function Section({
   description,
   eyebrow,
   headerAlign = "left",
+  id,
   tone = "default",
   title,
 }: SectionProps) {
@@ -33,7 +35,7 @@ export function Section({
     .join(" ");
 
   return (
-    <section className={sectionClass}>
+    <section className={sectionClass} id={id}>
       <Container>
         {(eyebrow || title || description) && (
           <div

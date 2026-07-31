@@ -7,6 +7,8 @@ type ButtonProps = {
   children: ReactNode;
   className?: string;
   href?: string;
+  rel?: string;
+  target?: string;
   to?: string;
   type?: "button" | "submit" | "reset";
   variant?: ButtonVariant;
@@ -19,6 +21,8 @@ export function Button({
   children,
   className = "",
   href,
+  rel,
+  target,
   to,
   type = "button",
   variant = "primary",
@@ -52,7 +56,13 @@ export function Button({
 
   if (href) {
     return (
-      <a className={classNames} href={href} onClick={onClick}>
+      <a
+        className={classNames}
+        href={href}
+        onClick={onClick}
+        rel={rel}
+        target={target}
+      >
         {content}
       </a>
     );

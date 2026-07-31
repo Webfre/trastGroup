@@ -6,8 +6,16 @@ import { navItems } from "../../data/site";
 import { NavLink } from "../../router/Router";
 import { Button } from "../ui/Button";
 
-const navClass = ({ isActive }: { isActive: boolean }) =>
-  `nav__link ${isActive ? "is-active" : ""}`.trim();
+const navClass =
+  (path: string) =>
+  ({ isActive }: { isActive: boolean }) =>
+    [
+      "nav__link",
+      path === "/brief" ? "nav__link--featured" : "",
+      isActive ? "is-active" : "",
+    ]
+      .filter(Boolean)
+      .join(" ");
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,14 +34,14 @@ export function Header() {
           <img
             className="brand__mark"
             src={media.logoHeader}
-            alt="ТрастГрупп Контракт"
+            alt="ООО ТрастГрупп Контракт"
           />
         </NavLink>
 
         <nav className="nav" aria-label="Основная навигация">
           {navItems.map((item) => (
             <NavLink
-              className={navClass}
+              className={navClass(item.path)}
               end={item.path === "/"}
               key={item.path}
               to={item.path}
@@ -59,6 +67,8 @@ export function Header() {
               className="icon-link"
               href={contacts.telegram}
               aria-label="Открыть Telegram"
+              rel="noopener noreferrer"
+              target="_blank"
               title="Telegram"
             >
               <Send size={18} />
@@ -69,14 +79,13 @@ export function Header() {
               className="icon-link"
               href={contacts.whatsapp}
               aria-label="Открыть WhatsApp"
+              rel="noopener noreferrer"
+              target="_blank"
               title="WhatsApp"
             >
               <MessageCircle size={18} />
             </a>
           )}
-          <Button to="/contacts" variant="primary">
-            Получить консультацию
-          </Button>
         </div>
 
         <button
@@ -95,7 +104,7 @@ export function Header() {
           <nav className="nav" aria-label="Мобильная навигация">
             {navItems.map((item) => (
               <NavLink
-                className={navClass}
+                className={navClass(item.path)}
                 end={item.path === "/"}
                 key={item.path}
                 to={item.path}
@@ -106,11 +115,13 @@ export function Header() {
             ))}
           </nav>
           <div className="mobile-panel__actions">
-            <Button to="/contacts" onClick={closeMenu}>
-              Получить консультацию
-            </Button>
             {contacts.telegram && (
-              <Button href={contacts.telegram} variant="ghost">
+              <Button
+                href={contacts.telegram}
+                rel="noopener noreferrer"
+                target="_blank"
+                variant="ghost"
+              >
                 Telegram
               </Button>
             )}

@@ -1,10 +1,11 @@
 import { FeatureGrid } from "../components/sections/FeatureGrid";
 import { PageHero } from "../components/sections/PageHero";
 import { TeamGrid } from "../components/sections/TeamGrid";
+import { WhyUsSection } from "../components/sections/WhyUsSection";
 import { Seo } from "../components/ui/Seo";
 import { Section } from "../components/ui/Section";
 import { media } from "../data/media";
-import { companyPrinciples, teamMembers } from "../data/site";
+import { teamMembers } from "../data/site";
 
 const approach = [
   {
@@ -25,24 +26,24 @@ export function AboutPage() {
   return (
     <>
       <Seo
-        title="О компании - ТрастГрупп Контракт"
+        title="О компании - ООО ТрастГрупп Контракт"
         description="Команда практиков в тендерах и поставках, которая знает закупки со стороны участника и сопровождающей стороны."
       />
 
       <PageHero
-        actions={[{ label: "Связаться с командой", to: "/contacts" }]}
+        actions={[{ label: "Почему выбирают нас", href: "#why-us" }]}
+        align="center"
+        className="page-hero--about page-hero--about-centered"
         eyebrow="О компании"
-        imageAlt="Команда ТрастГрупп Контракт"
-        imageSrc={media.heroTeam}
-        tags={["Тендеры", "Поставки", "Документы", "Логистика"]}
-        text="Команда выросла из практики поставок оборудования, поэтому видит не только заявку, но и исполнение контракта: документы, сроки, логистику и реальные обязательства."
-        title="Практики в тендерах, которые знают закупки со стороны участника"
+        imageAlt="Логотип ООО ТрастГрупп Контракт"
+        imageSrc={media.logoWorkspace}
+        text="ООО «ТрастГрупп Контракт» сопровождает закупки и поставки по России: помогает с заявками, площадками, документами и исполнением контрактов."
+        title="Знаем закупки со стороны участника"
       />
 
       <Section
         eyebrow="История"
         title="От поставок оборудования к сопровождению клиентов"
-        description="Эта рамка подтверждена в контентной основе: компания понимает процесс с двух сторон, как исполнитель и как эксперт по сопровождению."
       >
         <div className="split">
           <FeatureGrid columns={3} items={approach} variant="cards" />
@@ -54,16 +55,13 @@ export function AboutPage() {
 
       <Section
         eyebrow="Команда"
-        title="5 человек в процессе клиента"
-        description="Фото подготовлены из локальных материалов. Имена, должности и зоны ответственности нужно подтвердить перед релизом."
+        title="Рабочий контур"
         tone="soft"
       >
         <TeamGrid members={teamMembers} />
       </Section>
 
-      <Section eyebrow="Принципы" title="Как держим работу под контролем">
-        <FeatureGrid columns={4} items={companyPrinciples} variant="cards" />
-      </Section>
+      <WhyUsSection />
     </>
   );
 }

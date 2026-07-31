@@ -1,23 +1,10 @@
 import { Send } from "lucide-react";
 import { FormEvent, useState } from "react";
-import { Link } from "../../router/Router";
 import { Button } from "../ui/Button";
-import { FileUpload } from "../ui/FileUpload";
 
 type ContactFormProps = {
-  fileLabel?: string;
   title?: string;
-  withCompany?: boolean;
-  withFile?: boolean;
 };
-
-const requestTypes = [
-  "Тендерное сопровождение",
-  "БРИФ / Росатом",
-  "Поставка",
-  "Срочная проверка закупки",
-  "Другой вопрос",
-];
 
 const formatPhone = (value: string) => {
   const digits = value.replace(/\D/g, "").slice(0, 11);
@@ -50,18 +37,14 @@ const formatPhone = (value: string) => {
     .replace("( ", "(");
 };
 
-export function ContactForm({
-  fileLabel,
-  title = "Заявка",
-  withCompany = false,
-  withFile = true,
-}: ContactFormProps) {
+export function ContactForm({ title = "Заявка" }: ContactFormProps) {
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [status, setStatus] = useState("");
+  const hasEmail = email.trim().length > 0;
+  const hasPhone = phone.trim().length > 0;
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus("Форма готова к подключению канала отправки заявок.");
   };
 
   return (
@@ -85,37 +68,27 @@ export function ContactForm({
             autoComplete="tel"
             inputMode="tel"
             placeholder="+7 (___) ___-__-__"
-            required
+            required={!hasEmail}
             value={phone}
             onChange={(event) => setPhone(formatPhone(event.target.value))}
           />
         </label>
-        <label className="field">
-          <span>Email</span>
-          <input name="email" type="email" autoComplete="email" placeholder="name@company.ru" />
-        </label>
-        <label className="field">
-          <span>Тип обращения</span>
-          <select name="requestType" defaultValue={requestTypes[0]}>
-            {requestTypes.map((type) => (
-              <option key={type}>{type}</option>
-            ))}
-          </select>
-        </label>
-        {withCompany && (
-          <label className="field field--full">
-            <span>Компания / ИНН</span>
-            <input name="company" placeholder="Название компании или ИНН" />
-          </label>
-        )}
         <label className="field field--full">
-          <span>Комментарий</span>
-          <textarea
-            name="comment"
-            placeholder="Ссылка на закупку, сроки, продукция или короткое описание задачи"
+          <span>Email</span>
+          <input
+            name="email"
+            type="email"
+            autoComplete="email"
+            placeholder="name@company.ru"
+            required={!hasPhone}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
         </label>
-        {withFile && <FileUpload label={fileLabel} />}
+        <label className="field field--full">
+          <span>Комментарий</span>
+          <textarea name="comment" placeholder="" />
+        </label>
       </div>
 
       <div className="form__footer">
@@ -123,21 +96,20 @@ export function ContactForm({
           <input type="checkbox" required />
           <span>
             Согласен на обработку персональных данных в соответствии с{" "}
-            <Link to="/privacy">политикой обработки персональных данных</Link>.
+            <a href="/privacy" rel="noopener noreferrer" target="_blank">
+              политикой обработки персональных данных
+            </a>
+            .
           </span>
         </label>
         <Button
-          full
+          className="form__submit"
           icon={<Send aria-hidden="true" size={18} />}
           type="submit"
           variant="primary"
         >
           Отправить заявку
         </Button>
-        <p className="form__note">
-          Канал отправки заявок требует настройки: email, Telegram, CRM или SMTP.
-        </p>
-        {status && <p className="notice">{status}</p>}
       </div>
     </form>
   );

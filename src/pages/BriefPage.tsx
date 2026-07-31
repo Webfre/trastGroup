@@ -1,4 +1,4 @@
-import { ContactForm } from "../components/sections/ContactForm";
+import { ApplicationFormSection } from "../components/sections/ApplicationFormSection";
 import { FeatureGrid } from "../components/sections/FeatureGrid";
 import { PageHero } from "../components/sections/PageHero";
 import { Timeline } from "../components/sections/Timeline";
@@ -28,7 +28,6 @@ export function BriefPage() {
       <Section
         eyebrow="Что делаем"
         title="Закрываем ключевые этапы работы в БРИФ"
-        description="Блок выделен в отдельную страницу, потому что направление описано в документации как важная специализированная компетенция."
       >
         <FeatureGrid columns={3} items={briefServices} variant="cards" />
       </Section>
@@ -41,16 +40,7 @@ export function BriefPage() {
         <Timeline steps={briefProcess} />
       </Section>
 
-      <Section
-        eyebrow="Заявка"
-        title="Разберем статус и следующий шаг по БРИФ"
-        description="Можно прикрепить документы, выгрузку с портала, список продукции или описание текущей проблемы."
-      >
-        <ContactForm
-          fileLabel="Прикрепить документы по БРИФ"
-          title="БРИФ / Росатом"
-        />
-      </Section>
+      <ApplicationFormSection formTitle="БРИФ / Росатом" />
     </>
   );
 }

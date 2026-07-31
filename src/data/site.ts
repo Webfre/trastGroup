@@ -22,6 +22,7 @@ export type TimelineStep = {
 };
 
 export type Stat = {
+  counterValue?: number;
   value: string;
   label: string;
   note?: string;
@@ -37,8 +38,8 @@ export type TeamMember = {
 export const navItems: NavItem[] = [
   { label: "Главная", path: "/" },
   { label: "Тендеры", path: "/tender" },
-  { label: "БРИФ / Росатом", path: "/brief" },
   { label: "Поставки", path: "/supplies" },
+  { label: "БРИФ / Росатом", path: "/brief" },
   { label: "О компании", path: "/about" },
   { label: "Клиенты", path: "/clients" },
   { label: "Контакты", path: "/contacts" },
@@ -167,14 +168,14 @@ export const whyUs: Feature[] = [
 
 export const stats: Stat[] = [
   {
-    value: "уточняется",
+    counterValue: 8,
+    value: "8",
     label: "лет практики в тендерах",
-    note: "цифра требует подтверждения",
   },
   {
-    value: "уточняется",
+    counterValue: 140,
+    value: "140",
     label: "сопровожденных закупок",
-    note: "нужны подтвержденные показатели",
   },
   {
     value: "44-ФЗ / 223-ФЗ",
@@ -362,7 +363,7 @@ export const supplyCategories: Feature[] = [
 export const supplyProcess: TimelineStep[] = [
   {
     title: "Получаем спецификацию",
-    text: "Принимаем заявку, ТЗ, файл или список позиций для предварительного расчета.",
+    text: "Принимаем заявку, ТЗ или список позиций для предварительного расчета.",
   },
   {
     title: "Уточняем требования",
@@ -402,16 +403,16 @@ export const companyPrinciples: Feature[] = [
 ];
 
 export const logoPlaceholders = [
-  "ЛУКОЙЛ",
-  "РусГидро",
-  "ЕвроСибЭнерго",
-  "ФосАгро",
-  "Транснефть",
-  "СГК",
-  "Роснефть",
-  "T Group",
-  "СИБУР",
-  "Интер РАО",
+  { name: "ЛУКОЙЛ", logo: "/assets/partners/lukoil.png" },
+  { name: "РусГидро", logo: "/assets/partners/rushydro.png" },
+  { name: "ЕвроСибЭнерго", logo: "/assets/partners/eurosibenergo.png" },
+  { name: "ФосАгро", logo: "/assets/partners/phosagro.png" },
+  { name: "Транснефть", logo: "/assets/partners/transneft.png" },
+  { name: "СГК", logo: "/assets/partners/sibgenco.png" },
+  { name: "Роснефть", logo: "/assets/partners/rosneft.png" },
+  { name: "T Plus Group", logo: "/assets/partners/tplusgroup.png" },
+  { name: "СИБУР Нефтехим", logo: "/assets/partners/siburneftehim.png" },
+  { name: "Интер РАО", logo: "/assets/partners/interrao.png" },
 ];
 
 export const letters = [

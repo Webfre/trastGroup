@@ -1,6 +1,8 @@
 export const media = {
   logoHeader: "/assets/brand/logo-header-02.png",
   logoFooter: "/assets/brand/logo-white.png",
+  logoWorkspace: "/assets/brand/logo-workspace.svg",
+  contactsHero: "/assets/team/contacts-hero.jpg",
   heroTeam: "/assets/team/hero-team.webp",
   aboutTeam: "/assets/team/about-team.webp",
   team: {

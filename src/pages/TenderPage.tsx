@@ -1,4 +1,4 @@
-import { ContactForm } from "../components/sections/ContactForm";
+import { ApplicationFormSection } from "../components/sections/ApplicationFormSection";
 import { DirectionGrid } from "../components/sections/DirectionGrid";
 import { FeatureGrid } from "../components/sections/FeatureGrid";
 import { LogoCloud } from "../components/sections/LogoCloud";
@@ -41,7 +41,7 @@ export function TenderPage() {
   return (
     <>
       <Seo
-        title="Тендерное сопровождение - ТрастГрупп Контракт"
+        title="Тендерное сопровождение - ООО ТрастГрупп Контракт"
         description="Разовое участие, долгосрочное сопровождение, заявки, ЭТП, БРИФ, банковские гарантии и контроль исполнения контракта."
       />
 
@@ -61,7 +61,6 @@ export function TenderPage() {
       <Section
         eyebrow="Форматы работы"
         title="Разовое участие, сопровождение или задача под ключ"
-        description="Формат выбирается по ситуации клиента: от быстрой проверки закупки до постоянного тендерного отдела на аутсорсе."
       >
         <DirectionGrid items={tenderFormats} />
       </Section>
@@ -77,7 +76,6 @@ export function TenderPage() {
       <Section
         eyebrow="Площадки"
         title="Типы закупок и специализированные контуры"
-        description="Перечень отражает материалы проекта. Перед публикацией закрытых и отраслевых площадок список нужно подтвердить."
       >
         <LogoCloud items={platformGroups} />
       </Section>
@@ -93,22 +91,11 @@ export function TenderPage() {
       <Section
         eyebrow="Риски"
         title="Где чаще всего ошибаются"
-        description="Этот блок показывает экспертизу через конкретные зоны риска, а не через громкие обещания."
       >
         <FeatureGrid columns={3} items={tenderRisks} variant="cards" />
       </Section>
 
-      <Section
-        eyebrow="Документация"
-        title="Прикрепите закупку для предварительного разбора"
-        description="Можно отправить ссылку, файл документации, ТЗ или краткое описание задачи."
-        tone="soft"
-      >
-        <ContactForm
-          fileLabel="Прикрепить документацию закупки"
-          title="CTA"
-        />
-      </Section>
+      <ApplicationFormSection formTitle="CTA" />
     </>
   );
 }

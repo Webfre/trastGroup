@@ -2,29 +2,37 @@ import {
   ExternalLink,
   Mail,
   MapPin,
-  MessageCircle,
   Phone,
-  Send,
 } from "lucide-react";
+import type { ReactNode } from "react";
 import { contacts, socialLinks } from "../../data/env";
+import { SocialIcon } from "../ui/SocialIcon";
+
+type ContactCard = {
+  label: string;
+  value: string;
+  href: string;
+  icon: ReactNode;
+  isExternal?: boolean;
+};
 
 export function ContactCards() {
-  const cards = [
+  const cards: ContactCard[] = [
     {
       label: "Телефон",
-      value: contacts.phoneDisplay || "Требует уточнения",
+      value: contacts.phoneDisplay,
       href: contacts.phoneHref,
       icon: <Phone size={20} />,
     },
     {
       label: "Email",
-      value: contacts.email || "Требует уточнения",
-      href: contacts.email ? `mailto:${contacts.email}` : "",
+      value: contacts.email,
+      href: "",
       icon: <Mail size={20} />,
     },
     {
       label: "Город",
-      value: contacts.city || "Требует уточнения",
+      value: contacts.city,
       href: "",
       icon: <MapPin size={20} />,
     },
@@ -32,14 +40,10 @@ export function ContactCards() {
       label: link.label,
       value: link.value,
       href: link.value,
-      icon:
-        link.label === "Telegram" ? (
-          <Send size={20} />
-        ) : (
-          <MessageCircle size={20} />
-        ),
+      icon: <SocialIcon label={link.label} />,
+      isExternal: true,
     })),
-  ];
+  ].filter((card) => card.value || card.href);
 
   return (
     <div className="contact-grid">
@@ -51,15 +55,21 @@ export function ContactCards() {
             </span>
             <span className="contact-card__label">{card.label}</span>
             <span className="contact-card__value">
-              {card.href ? "Открыть" : card.value}
+              {card.isExternal ? "Открыть" : card.value}
             </span>
-            {card.href && <ExternalLink aria-hidden="true" size={16} />}
+            {card.isExternal && <ExternalLink aria-hidden="true" size={16} />}
           </>
         );
 
         if (card.href) {
           return (
-            <a className="contact-card" href={card.href} key={card.label}>
+            <a
+              className="contact-card"
+              href={card.href}
+              key={card.label}
+              rel={card.isExternal ? "noopener noreferrer" : undefined}
+              target={card.isExternal ? "_blank" : undefined}
+            >
               {content}
             </a>
           );
