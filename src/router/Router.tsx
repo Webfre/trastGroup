@@ -6,7 +6,13 @@ import {
   useMemo,
   useState,
 } from "react";
-import { normalizePath, RouterContext, useRouter } from "./routerContext";
+import {
+  normalizePath,
+  RouterContext,
+  stripBasePath,
+  useRouter,
+  withBasePath,
+} from "./routerContext";
 
 type LinkProps = {
   children: ReactNode;
@@ -21,18 +27,18 @@ type NavLinkProps = Omit<LinkProps, "className"> & {
 };
 
 export function RouterProvider({ children }: { children: ReactNode }) {
-  const [path, setPath] = useState(() => normalizePath(window.location.pathname));
+  const [path, setPath] = useState(() => stripBasePath(window.location.pathname));
 
   useEffect(() => {
-    const handlePopState = () => setPath(normalizePath(window.location.pathname));
+    const handlePopState = () => setPath(stripBasePath(window.location.pathname));
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
   const navigate = useCallback((to: string) => {
     const nextPath = normalizePath(to);
-    if (nextPath !== normalizePath(window.location.pathname)) {
-      window.history.pushState({}, "", nextPath);
+    if (nextPath !== stripBasePath(window.location.pathname)) {
+      window.history.pushState({}, "", withBasePath(nextPath));
       setPath(nextPath);
     }
   }, []);
@@ -54,7 +60,7 @@ export function Link({ children, className, onClick, to }: LinkProps) {
   };
 
   return (
-    <a className={className} href={to} onClick={handleClick}>
+    <a className={className} href={withBasePath(to)} onClick={handleClick}>
       {children}
     </a>
   );

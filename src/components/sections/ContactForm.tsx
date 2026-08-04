@@ -1,5 +1,6 @@
 import { Send } from "lucide-react";
 import { FormEvent, useState } from "react";
+import { withBasePath } from "../../router/routerContext";
 import { Button } from "../ui/Button";
 
 type ContactFormProps = {
@@ -96,7 +97,7 @@ export function ContactForm({ title = "Заявка" }: ContactFormProps) {
           <input type="checkbox" required />
           <span>
             Согласен на обработку персональных данных в соответствии с{" "}
-            <a href="/privacy" rel="noopener noreferrer" target="_blank">
+            <a href={withBasePath("/privacy")} rel="noopener noreferrer" target="_blank">
               политикой обработки персональных данных
             </a>
             .

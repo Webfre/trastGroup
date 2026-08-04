@@ -1,3 +1,4 @@
+import { publicAsset } from "./assets";
 import { media } from "./media";
 
 export type NavItem = {
@@ -403,16 +404,22 @@ export const companyPrinciples: Feature[] = [
 ];
 
 export const logoPlaceholders = [
-  { name: "ЛУКОЙЛ", logo: "/assets/partners/lukoil.png" },
-  { name: "РусГидро", logo: "/assets/partners/rushydro.png" },
-  { name: "ЕвроСибЭнерго", logo: "/assets/partners/eurosibenergo.png" },
-  { name: "ФосАгро", logo: "/assets/partners/phosagro.png" },
-  { name: "Транснефть", logo: "/assets/partners/transneft.png" },
-  { name: "СГК", logo: "/assets/partners/sibgenco.png" },
-  { name: "Роснефть", logo: "/assets/partners/rosneft.png" },
-  { name: "T Plus Group", logo: "/assets/partners/tplusgroup.png" },
-  { name: "СИБУР Нефтехим", logo: "/assets/partners/siburneftehim.png" },
-  { name: "Интер РАО", logo: "/assets/partners/interrao.png" },
+  { name: "ЛУКОЙЛ", logo: publicAsset("assets/partners/lukoil.png") },
+  { name: "РусГидро", logo: publicAsset("assets/partners/rushydro.png") },
+  {
+    name: "ЕвроСибЭнерго",
+    logo: publicAsset("assets/partners/eurosibenergo.png"),
+  },
+  { name: "ФосАгро", logo: publicAsset("assets/partners/phosagro.png") },
+  { name: "Транснефть", logo: publicAsset("assets/partners/transneft.png") },
+  { name: "СГК", logo: publicAsset("assets/partners/sibgenco.png") },
+  { name: "Роснефть", logo: publicAsset("assets/partners/rosneft.png") },
+  { name: "T Plus Group", logo: publicAsset("assets/partners/tplusgroup.png") },
+  {
+    name: "СИБУР Нефтехим",
+    logo: publicAsset("assets/partners/siburneftehim.png"),
+  },
+  { name: "Интер РАО", logo: publicAsset("assets/partners/interrao.png") },
 ];
 
 export const letters = [

@@ -1,0 +1,71 @@
+name: Deploy demo to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        env:
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_COMPANY_NAME: ${{ vars.NEXT_PUBLIC_COMPANY_NAME }}
+          NEXT_PUBLIC_COMPANY_TAGLINE: ${{ vars.NEXT_PUBLIC_COMPANY_TAGLINE }}
+          NEXT_PUBLIC_PHONE_DISPLAY: ${{ vars.NEXT_PUBLIC_PHONE_DISPLAY }}
+          NEXT_PUBLIC_PHONE_HREF: ${{ vars.NEXT_PUBLIC_PHONE_HREF }}
+          NEXT_PUBLIC_EMAIL: ${{ vars.NEXT_PUBLIC_EMAIL }}
+          NEXT_PUBLIC_CITY: ${{ vars.NEXT_PUBLIC_CITY }}
+          NEXT_PUBLIC_ADDRESS: ${{ vars.NEXT_PUBLIC_ADDRESS }}
+          NEXT_PUBLIC_WORKING_HOURS: ${{ vars.NEXT_PUBLIC_WORKING_HOURS }}
+          NEXT_PUBLIC_TELEGRAM_URL: ${{ vars.NEXT_PUBLIC_TELEGRAM_URL }}
+          NEXT_PUBLIC_WHATSAPP_URL: ${{ vars.NEXT_PUBLIC_WHATSAPP_URL }}
+          NEXT_PUBLIC_VK_URL: ${{ vars.NEXT_PUBLIC_VK_URL }}
+          NEXT_PUBLIC_INSTAGRAM_URL: ${{ vars.NEXT_PUBLIC_INSTAGRAM_URL }}
+          NEXT_PUBLIC_SUPPORT_URL: ${{ vars.NEXT_PUBLIC_SUPPORT_URL }}
+        run: npm run build
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
