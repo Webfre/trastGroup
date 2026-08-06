@@ -112,7 +112,7 @@ const getPlaces = (value: number): PlaceValue[] => {
 };
 
 export function Counter({
-  borderRadius = 4,
+  borderRadius = 0,
   bottomGradientStyle,
   containerStyle,
   counterStyle,

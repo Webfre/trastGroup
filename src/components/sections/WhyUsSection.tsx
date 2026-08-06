@@ -1,85 +1,51 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  MapPinned,
+  MessageCircle,
+  PackageCheck,
+  RefreshCw,
+  type LucideIcon,
+} from "lucide-react";
 import { whyUs } from "../../data/site";
-import { Folder } from "../ui/Folder";
 import { Section } from "../ui/Section";
 
-const folderPapers = [
-  ["Требования", "Заявка", "Исполнение"],
-  ["Анализ", "Площадки", "Договор"],
-  ["Тендеры", "Юрист", "Логистика"],
-  ["ЕИС", "ЭТП", "Контроль"],
+const advantageIcons: LucideIcon[] = [
+  RefreshCw,
+  MessageCircle,
+  PackageCheck,
+  MapPinned,
 ];
 
 export function WhyUsSection() {
-  const folderGridRef = useRef<HTMLDivElement>(null);
-  const hasAutoOpenedRef = useRef(false);
-  const [shouldAutoOpenFirstFolder, setShouldAutoOpenFirstFolder] = useState(false);
-
-  useEffect(() => {
-    const folderGrid = folderGridRef.current;
-
-    if (!folderGrid || !("IntersectionObserver" in window)) {
-      return;
-    }
-
-    let timeoutId: number | undefined;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (hasAutoOpenedRef.current) {
-          return;
-        }
-
-        if (entries.some((entry) => entry.isIntersecting)) {
-          hasAutoOpenedRef.current = true;
-          setShouldAutoOpenFirstFolder(true);
-          timeoutId = window.setTimeout(() => {
-            setShouldAutoOpenFirstFolder(false);
-          }, 1800);
-          observer.disconnect();
-        }
-      },
-      {
-        rootMargin: "0px 0px -18% 0px",
-        threshold: 0.25,
-      },
-    );
-
-    observer.observe(folderGrid);
-
-    return () => {
-      observer.disconnect();
-
-      if (timeoutId) {
-        window.clearTimeout(timeoutId);
-      }
-    };
-  }, []);
-
   return (
     <Section
-      className="why-folder-section"
+      className="why-us-section"
       eyebrow="Почему выбирают нас"
       id="why-us"
-      title="Практичный подход вместо формальной подачи заявки"
+      title="Берём закупки под полный контроль"
     >
-      <div className="folder-feature-grid" ref={folderGridRef}>
-        {whyUs.map((item, index) => (
-          <article className="folder-feature" key={item.title}>
-            <Folder
-              autoOpen={index === 0 && shouldAutoOpenFirstFolder}
-              items={folderPapers[index]?.map((paper) => (
-                <span className="folder-paper-label" key={paper}>
-                  {paper}
+      <div className="advantage-grid">
+        {whyUs.map((item, index) => {
+          const Icon = advantageIcons[index] ?? RefreshCw;
+
+          return (
+            <article className="advantage-card" key={item.title}>
+              <div className="advantage-card__graphic" aria-hidden="true">
+                <span className="advantage-card__icon">
+                  <Icon size={32} strokeWidth={1.7} />
                 </span>
-              ))}
-              label={`Открыть папку: ${item.title}`}
-            />
-            <div className="folder-feature__body">
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </div>
-          </article>
-        ))}
+                <span className="advantage-card__trace">
+                  <i />
+                  <i />
+                  <i />
+                </span>
+              </div>
+              <div className="advantage-card__body">
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </Section>
   );

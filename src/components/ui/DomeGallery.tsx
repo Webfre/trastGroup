@@ -160,8 +160,8 @@ export function DomeGallery({
   dragDampening = 2,
   openedImageWidth = '400px',
   openedImageHeight = '400px',
-  imageBorderRadius = '30px',
-  openedImageBorderRadius = '30px',
+  imageBorderRadius = '0',
+  openedImageBorderRadius = '0',
   grayscale = true
 }: DomeGalleryProps) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -617,7 +617,7 @@ export function DomeGallery({
         width: ${overlayRelativeToRoot.width}px;
         height: ${overlayRelativeToRoot.height}px;
         z-index: 9999;
-        border-radius: var(--enlarge-radius, 32px);
+        border-radius: var(--enlarge-radius, 0);
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0,0,0,.35);
         transition: all ${enlargeTransitionMs}ms ease-out;

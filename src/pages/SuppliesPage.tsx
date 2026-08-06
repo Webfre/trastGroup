@@ -70,10 +70,10 @@ export function SuppliesPage() {
             dragDampening={0.92}
             fit={0.74}
             grayscale={false}
-            imageBorderRadius="8px"
+            imageBorderRadius="0"
             maxVerticalRotationDeg={0}
             minRadius={460}
-            openedImageBorderRadius="8px"
+            openedImageBorderRadius="0"
             openedImageHeight="min(70vh, 520px)"
             openedImageWidth="min(72vw, 560px)"
             overlayBlurColor="#171717"

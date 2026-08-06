@@ -6,12 +6,12 @@ export const media = {
   logoWorkspace: publicAsset("assets/brand/logo-workspace.svg"),
   contactsHero: publicAsset("assets/team/contacts-hero.jpg"),
   heroTeam: publicAsset("assets/team/hero-team.webp"),
-  aboutTeam: publicAsset("assets/team/about-team.webp"),
+  aboutTeam: publicAsset("assets/team/about-team-final.webp"),
   team: {
-    katya: publicAsset("assets/team/katya.webp"),
-    kristina: publicAsset("assets/team/kristina.webp"),
-    lena: publicAsset("assets/team/lena.webp"),
-    nastya: publicAsset("assets/team/nastya.webp"),
-    sveta: publicAsset("assets/team/sveta.webp"),
+    katya: publicAsset("assets/team/katya-final.webp"),
+    kristina: publicAsset("assets/team/kristina-final.webp"),
+    lena: publicAsset("assets/team/lena-final.webp"),
+    nastya: publicAsset("assets/team/nastya-final.webp"),
+    sveta: publicAsset("assets/team/sveta-final.webp"),
   },
 } as const;

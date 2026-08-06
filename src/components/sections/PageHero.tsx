@@ -26,6 +26,7 @@ type PageHeroProps = {
   tags?: string[];
   text?: string;
   title: string;
+  withBackground?: boolean;
 };
 
 export function PageHero({
@@ -40,11 +41,13 @@ export function PageHero({
   tags = [],
   text,
   title,
+  withBackground = true,
 }: PageHeroProps) {
   const heroClassName = [
     "page-hero",
     align === "center" ? "page-hero--center" : "",
     bottomSlot ? "page-hero--has-bottom" : "",
+    !withBackground ? "page-hero--plain" : "",
     className,
   ]
     .filter(Boolean)
@@ -52,7 +55,7 @@ export function PageHero({
 
   return (
     <section className={heroClassName}>
-      <HeroFerrofluidBackground />
+      {withBackground && <HeroFerrofluidBackground />}
       <Container>
         <div className="page-hero__grid">
           <div className="page-hero__content">
