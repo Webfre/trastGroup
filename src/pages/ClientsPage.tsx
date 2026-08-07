@@ -38,7 +38,7 @@ export function ClientsPage() {
 
       <Section
         eyebrow="Письма"
-        title="Слайдер благодарственных писем"
+        title="Благодарственные письма наших клиентов"
         tone="soft"
       >
         <LettersRail items={letters} />

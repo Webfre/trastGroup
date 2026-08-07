@@ -41,7 +41,7 @@ export function PageHero({
   tags = [],
   text,
   title,
-  withBackground = true,
+  withBackground = false,
 }: PageHeroProps) {
   const heroClassName = [
     "page-hero",

@@ -4,6 +4,7 @@ import { BriefPage } from "./pages/BriefPage";
 import { ClientsPage } from "./pages/ClientsPage";
 import { ContactsPage } from "./pages/ContactsPage";
 import { HomePage } from "./pages/HomePage";
+import { OfferPage } from "./pages/OfferPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
 import { SuppliesPage } from "./pages/SuppliesPage";
 import { TenderPage } from "./pages/TenderPage";
@@ -18,6 +19,7 @@ const pages = {
   "/clients": ClientsPage,
   "/contacts": ContactsPage,
   "/privacy": PrivacyPage,
+  "/offer": OfferPage,
 };
 
 function NotFoundPage() {

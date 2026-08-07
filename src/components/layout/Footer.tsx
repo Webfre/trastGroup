@@ -1,15 +1,9 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { company, contacts, socialLinks } from "../../data/env";
 import { media } from "../../data/media";
+import { navItems } from "../../data/site";
 import { Link } from "../../router/Router";
 import { SocialIcon } from "../ui/SocialIcon";
-
-const footerNav = [
-  { label: "Главная", to: "/" },
-  { label: "О компании", to: "/about" },
-  { label: "Клиенты и благодарности", to: "/clients" },
-  { label: "Контакты", to: "/contacts" },
-];
 
 const footerServices = [
   { label: "Тендерное сопровождение", to: "/tender" },
@@ -59,8 +53,8 @@ export function Footer() {
         <div className="site-footer__grid">
           <nav className="footer-column" aria-label="Навигация в подвале">
             <h2>Навигация</h2>
-            {footerNav.map((item) => (
-              <Link key={item.to} to={item.to}>
+            {navItems.map((item) => (
+              <Link key={item.path} to={item.path}>
                 {item.label}
               </Link>
             ))}
@@ -97,7 +91,10 @@ export function Footer() {
 
         <div className="site-footer__bottom">
           <span>© 2026 ООО "ТрастГрупп Контракт"</span>
-          <Link to="/privacy">Политика обработки персональных данных</Link>
+          <div className="site-footer__legal-links">
+            <Link to="/privacy">Политика обработки персональных данных</Link>
+            <Link to="/offer">Публичная оферта</Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -28,76 +28,78 @@ export function Header() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="site-header">
-      <div className="container site-header__bar">
-        <NavLink className="brand brand--header" to="/" onClick={closeMenu}>
-          <img
-            className="brand__mark"
-            src={media.logoHeader}
-            alt="ООО ТрастГрупп Контракт"
-          />
-        </NavLink>
+    <>
+      <header className="site-header">
+        <div className="container site-header__bar">
+          <NavLink className="brand brand--header" to="/" onClick={closeMenu}>
+            <img
+              className="brand__mark"
+              src={media.logoHeader}
+              alt="ООО ТрастГрупп Контракт"
+            />
+          </NavLink>
 
-        <nav className="nav" aria-label="Основная навигация">
-          {navItems.map((item) => (
-            <NavLink
-              className={navClass(item.path)}
-              end={item.path === "/"}
-              key={item.path}
-              to={item.path}
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
+          <nav className="nav" aria-label="Основная навигация">
+            {navItems.map((item) => (
+              <NavLink
+                className={navClass(item.path)}
+                end={item.path === "/"}
+                key={item.path}
+                to={item.path}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
 
-        <div className="header-actions">
-          {contacts.phoneDisplay && contacts.phoneHref && (
-            <a
-              className="icon-link"
-              href={contacts.phoneHref}
-              aria-label={`Позвонить: ${contacts.phoneDisplay}`}
-              title={contacts.phoneDisplay}
-            >
-              <Phone size={18} />
-            </a>
-          )}
-          {contacts.telegram && (
-            <a
-              className="icon-link"
-              href={contacts.telegram}
-              aria-label="Открыть Telegram"
-              rel="noopener noreferrer"
-              target="_blank"
-              title="Telegram"
-            >
-              <Send size={18} />
-            </a>
-          )}
-          {contacts.whatsapp && (
-            <a
-              className="icon-link"
-              href={contacts.whatsapp}
-              aria-label="Открыть WhatsApp"
-              rel="noopener noreferrer"
-              target="_blank"
-              title="WhatsApp"
-            >
-              <MessageCircle size={18} />
-            </a>
-          )}
+          <div className="header-actions">
+            {contacts.phoneDisplay && contacts.phoneHref && (
+              <a
+                className="icon-link"
+                href={contacts.phoneHref}
+                aria-label={`Позвонить: ${contacts.phoneDisplay}`}
+                title={contacts.phoneDisplay}
+              >
+                <Phone size={18} />
+              </a>
+            )}
+            {contacts.telegram && (
+              <a
+                className="icon-link"
+                href={contacts.telegram}
+                aria-label="Открыть Telegram"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Telegram"
+              >
+                <Send size={18} />
+              </a>
+            )}
+            {contacts.whatsapp && (
+              <a
+                className="icon-link"
+                href={contacts.whatsapp}
+                aria-label="Открыть WhatsApp"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="WhatsApp"
+              >
+                <MessageCircle size={18} />
+              </a>
+            )}
+          </div>
+
+          <button
+            className="mobile-toggle"
+            type="button"
+            aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
+            aria-expanded={isOpen}
+            onClick={() => setIsOpen((value) => !value)}
+          >
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
-
-        <button
-          className="mobile-toggle"
-          type="button"
-          aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen((value) => !value)}
-        >
-          {isOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
+      </header>
 
       <div className={`mobile-panel ${isOpen ? "is-open" : ""}`.trim()}>
         <div className="mobile-panel__inner">
@@ -133,6 +135,6 @@ export function Header() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }

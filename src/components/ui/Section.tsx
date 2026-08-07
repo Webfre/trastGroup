@@ -10,7 +10,7 @@ type SectionProps = {
   headerAlign?: "left" | "center";
   id?: string;
   tone?: "default" | "soft" | "dark";
-  title?: string;
+  title?: ReactNode;
 };
 
 export function Section({
